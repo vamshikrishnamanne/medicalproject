@@ -1,0 +1,25 @@
+<h1 style = "text-align: center;" >perform segmentation thresholding for uploaded image</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h3>Choose File</h3>            
+            <div class="form-group">
+                <input type="file" name="image" (change)="fileProgress($event)" />
+            </div>
+             <div *ngIf="fileUploadProgress">
+                Upload progress: {{ fileUploadProgress }}
+            </div>
+   
+             
+            <div class="form-group">
+                <button class="btn btn-primary"  (click)="onSubmit()">Submit</button>
+            </div>
+        </div>
+    </div>
+<div class="row">
+    <div *ngIf="isShown" >
+        <h2>thresolding segmentation</h2>
+        <img  class="images" src={{threshold}} [style.border]="threshold ? '1px solid black' : 'none'"/>
+      </div>
+</div>
+</div>

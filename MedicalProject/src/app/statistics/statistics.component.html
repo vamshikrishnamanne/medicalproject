@@ -1,0 +1,43 @@
+<h1 style = "text-align: center;" >calculate mean,median, mode value for selected ROI</h1>
+<div fxLayout="column" fxLayoutAlign="start center" class="mat-body-1">
+<input type="file" (change)="fileChangeEvent($event)" />
+<br />
+<br />
+<br />
+<br />
+<button (click)="toggleContainWithinAspectRatio()">{{containWithinAspectRatio?'Fill Aspect Ratio':'Contain Within Aspect Ratio'}}</button>
+
+<br />
+<br />
+<button (click)="zoomOut()">Zoom -</button> <button (click)="zoomIn()">Zoom +</button>
+
+
+<div>
+    <image-cropper
+        [imageChangedEvent]="imageChangedEvent"
+        [maintainAspectRatio]="true"
+        [containWithinAspectRatio]="containWithinAspectRatio"
+        [aspectRatio]="aspectRatio"
+        [resizeToWidth]="500"
+        [cropperMinWidth]="128"
+        [onlyScaleDown]="true"
+        [roundCropper]="false"
+        [canvasRotation]="canvasRotation"
+        [transform]="transform"
+        [alignImage]="'left'"
+        [style.display]="showCropper ? null : 'none'"
+        format="png"
+        (imageCropped)="imageCropped($event)"
+        (imageLoaded)="imageLoaded()"
+        (cropperReady)="cropperReady($event)"
+        (loadImageFailed)="loadImageFailed()"
+    ></image-cropper>
+</div>
+<img [src]="croppedImage" [style.border]="croppedImage ? '1px solid black' : 'none'" />
+<button (click)="submit()">calculate</button>
+<div *ngIf="isShown" >
+  <h2>Metrics</h2>
+  <h5>mean : {{result.mean}}</h5>
+  <h5>median : {{result.median}}</h5>
+  <h5>standard deviation : {{result.standard_deviation}}</h5>
+</div></div>
